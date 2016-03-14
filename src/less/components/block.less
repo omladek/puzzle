@@ -1,0 +1,21 @@
+.block {
+    background: silver;
+    border: 1px solid black;
+    display: inline-block;
+    float: left;
+    height: @block-height;
+    line-height: @block-height;
+    text-align: center;
+    transition: all .25s linear;
+    width: @block-width;
+
+    &.empty {
+        background: white;
+        color: fade(black, 20%);
+    }
+
+    &.movable {
+        background: darken(silver, 30%);
+        cursor: pointer;
+    }
+}
