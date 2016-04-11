@@ -6,7 +6,8 @@ class Block extends Component {
             id,
             text,
             empty,
-            isMovable } = this.props;
+            isMovable,
+            coords } = this.props;
 
         if (isMovable) {
             this.move(id);
@@ -23,9 +24,8 @@ class Block extends Component {
             id,
             text,
             empty,
-            isMovable } = this.props;
-
-        let movable = isMovable ? 'movable' : '';
+            isMovable,
+            coords } = this.props;
 
         return (
             <div onClick={this.handleClick.bind(this)}>
@@ -42,5 +42,6 @@ Block.propTypes = {
     text: PropTypes.string.isRequired,
     empty: PropTypes.bool.isRequired,
     isMovable: PropTypes.bool.isRequired,
-    onBlockClick: PropTypes.func.isRequired
+    onBlockClick: PropTypes.func.isRequired,
+    coords: PropTypes.array.isRequired
 };
