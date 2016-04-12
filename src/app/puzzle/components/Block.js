@@ -15,7 +15,6 @@ class Block extends Component {
     }
 
     move(id) {
-        console.log('id: ' + id);
         this.props.onBlockClick(id);
     }
 

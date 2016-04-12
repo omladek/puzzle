@@ -74,13 +74,13 @@ class Puzzle extends Component {
                     coords: [3,2]
                 },
                 {
-                    text: '11',
+                    text: '12',
                     empty: false,
                     isMovable: false,
                     coords: [3,3]
                 },
                 {
-                    text: '12',
+                    text: '15',
                     empty: false,
                     isMovable: true,
                     coords: [3,4]
@@ -98,7 +98,7 @@ class Puzzle extends Component {
                     coords: [4,2]
                 },
                 {
-                    text: '15',
+                    text: '11',
                     empty: false,
                     isMovable: true,
                     coords: [4,3]
