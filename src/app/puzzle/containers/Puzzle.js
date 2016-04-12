@@ -15,99 +15,99 @@ class Puzzle extends Component {
             items: [
                 {
                     text: '1',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [1,1]
+                    coords: [1, 1]
                 },
                 {
                     text: '2',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [1,2]
+                    coords: [1, 2]
                 },
                 {
                     text: '3',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [1,3]
+                    coords: [1, 3]
                 },
                 {
                     text: '4',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [1,4]
+                    coords: [1, 4]
                 },
                 {
                     text: '5',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [2,1]
+                    coords: [2, 1]
                 },
                 {
                     text: '6',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [2,2]
+                    coords: [2, 2]
                 },
                 {
                     text: '7',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [2,3]
+                    coords: [2, 3]
                 },
                 {
                     text: '8',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [2,4]
+                    coords: [2, 4]
                 },
                 {
                     text: '9',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [3,1]
+                    coords: [3, 1]
                 },
                 {
                     text: '10',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [3,2]
+                    coords: [3, 2]
                 },
                 {
                     text: '12',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [3,3]
+                    coords: [3, 3]
                 },
                 {
                     text: '15',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: true,
-                    coords: [3,4]
+                    coords: [3, 4]
                 },
                 {
                     text: '13',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [4,1]
+                    coords: [4, 1]
                 },
                 {
                     text: '14',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: false,
-                    coords: [4,2]
+                    coords: [4, 2]
                 },
                 {
                     text: '11',
-                    empty: false,
+                    isEmpty: false,
                     isMovable: true,
-                    coords: [4,3]
+                    coords: [4, 3]
                 },
                 {
-                    text: 'empty',
-                    empty: true,
+                    text: ' ',
+                    isEmpty: true,
                     isMovable: false,
-                    coords: [4,4]
+                    coords: [4, 4]
                 }
                 ]
             };

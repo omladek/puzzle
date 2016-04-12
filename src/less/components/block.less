@@ -1,21 +1,81 @@
 .block {
     background: silver;
-    border: 1px solid black;
+    outline: 1px solid black;
     display: inline-block;
     float: left;
     height: @block-height;
     line-height: @block-height;
     text-align: center;
-    transition: all .25s linear;
+    transition: transform .25s linear;
     width: @block-width;
 
-    &.empty {
+    &--empty {
         background: white;
         color: fade(black, 20%);
     }
 
-    &.movable {
-        background: darken(silver, 30%);
+    &--movable {
+        background: red;
         cursor: pointer;
+    }
+
+    &--move-up {
+        animation: animationMoveUp .25s 1 linear;
+
+    }
+
+    &--move-down {
+        animation: animationMoveDown .25s 1 linear;
+
+    }
+
+    &--move-left {
+        animation: animationMoveLeft .25s 1 linear;
+
+    }
+
+    &--move-right {
+        animation: animationMoveRight .25s 1 linear;
+    }
+}
+
+
+@keyframes animationMoveUp {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes animationMoveDown {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes animationMoveLeft {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes animationMoveRight {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
     }
 }

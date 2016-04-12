@@ -5,7 +5,7 @@ class Block extends Component {
         const {
             id,
             text,
-            empty,
+            isEmpty,
             isMovable,
             coords } = this.props;
 
@@ -22,7 +22,7 @@ class Block extends Component {
         const {
             id,
             text,
-            empty,
+            isEmpty,
             isMovable,
             coords } = this.props;
 
@@ -39,7 +39,7 @@ export default Block;
 Block.propTypes = {
     id: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
-    empty: PropTypes.bool.isRequired,
+    isEmpty: PropTypes.bool.isRequired,
     isMovable: PropTypes.bool.isRequired,
     onBlockClick: PropTypes.func.isRequired,
     coords: PropTypes.array.isRequired
