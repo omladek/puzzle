@@ -6,7 +6,7 @@
     height: @block-height;
     line-height: @block-height;
     text-align: center;
-    transition: transform .25s linear;
+    transition: all .5s linear;
     width: @block-width;
 
     &--empty {
@@ -15,7 +15,7 @@
     }
 
     &--movable {
-        background: red;
+        background: lighten(silver, 9);
         cursor: pointer;
     }
 
@@ -37,8 +37,11 @@
     &--move-right {
         animation: animationMoveRight .25s 1 linear;
     }
-}
 
+    &--win {
+        background: lime;
+    }
+}
 
 @keyframes animationMoveUp {
     0% {

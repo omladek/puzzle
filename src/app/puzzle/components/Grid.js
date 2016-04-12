@@ -10,62 +10,43 @@ class Grid extends Component {
         };
     }
 
-    handleBlockClick(id) {
-        let blocks = this.state.blocks;
-        const row = blocks[id].coords[0];
-        const col = blocks[id].coords[1];
-        /*const moveUp = this.hasEmptyNeighbour(blocks, row-1, col); //up
-        const moveDown = this.hasEmptyNeighbour(blocks, row+1, col); //down
-        const moveLeft = this.hasEmptyNeighbour(blocks, row, col-1); //left
-        const moveRight = this.hasEmptyNeighbour(blocks, row, col+1); //right*/
-        let moveTo;
-        let direction;
+    handleBlockClick(index) {
+        const blocks = this.state.blocks;
+        const row = blocks[index].coords[0];
+        const col = blocks[index].coords[1];
+        const targetInfo = this.getTargetInfo(blocks, row, col);
+        const moveTo = targetInfo.targetIndex;
+        const direction = targetInfo.direction;
 
-        this.getDirection(blocks, row, col);
-
-        /*if (moveUp.result) {
-            moveTo = moveUp.index;
-            direction = 'up';
-        } else if (moveDown.result) {
-            moveTo = moveDown.index;
-            direction = 'down';
-        } else if (moveLeft.result) {
-            moveTo = moveLeft.index;
-            direction = 'left';
-        } else if (moveRight.result) {
-            moveTo = moveRight.index;
-            direction = 'right';
-        }*/
-
-        this.switchBlocks(blocks, id, moveTo, direction);
+        this.switchBlocks(blocks, index, moveTo, direction);
     }
 
-    getDirection(block, row, col) {
-        const moveUp = this.hasEmptyNeighbour(blocks, row-1, col); //up
-        const moveDown = this.hasEmptyNeighbour(blocks, row+1, col); //down
-        const moveLeft = this.hasEmptyNeighbour(blocks, row, col-1); //left
-        const moveRight = this.hasEmptyNeighbour(blocks, row, col+1); //right
+    getTargetInfo(blocks, row, col) {
+        const up = this.hasEmptyNeighbour(blocks, row-1, col);
+        const down = this.hasEmptyNeighbour(blocks, row+1, col);
+        const left = this.hasEmptyNeighbour(blocks, row, col-1);
+        const right = this.hasEmptyNeighbour(blocks, row, col+1);
         let direction;
         let targetIndex;
 
-        if (moveUp.result) {
-            targetIndex = moveUp.index;
+        if (up.result) {
+            targetIndex = up.index;
             direction = 'up';
-        } else if (moveDown.result) {
-            targetIndex = moveDown.index;
+        } else if (down.result) {
+            targetIndex = down.index;
             direction = 'down';
-        } else if (moveLeft.result) {
-            targetIndex = moveLeft.index;
+        } else if (left.result) {
+            targetIndex = left.index;
             direction = 'left';
-        } else if (moveRight.result) {
-            targetIndex = moveRight.index;
+        } else if (right.result) {
+            targetIndex = right.index;
             direction = 'right';
         }
 
         return {
             direction,
             targetIndex
-        }
+        };
     }
 
     hasEmptyNeighbour(blocks, row, col) {
@@ -82,12 +63,13 @@ class Grid extends Component {
                 blocks[i].isEmpty) {
                 result = true;
                 index = i;
+                break;
             }
         }
 
         return {
-            result: result,
-            index: index
+            result,
+            index
         };
     }
 
@@ -97,25 +79,21 @@ class Grid extends Component {
 
         blocks = this.unsetDirection(blocks);
 
+        // set new position
         blocks[to].isEmpty = false;
         blocks[to].isMovable = true;
         blocks[to].text = oldtext;
         blocks[to].direction = direction;
 
-        // new block
+        // set empty block
         blocks[from].isEmpty = true;
         blocks[from].isMovable = false;
         blocks[from].text = newtext;
 
         blocks = this.unsetMovability(blocks);
-        blocks = this.setMovability(blocks);
+        blocks = this.setMovability(blocks, blocks[from].coords);
 
-        const isPassed = this.isPassed(blocks);
-
-        this.setState({
-            blocks: blocks,
-            isPassed: isPassed
-        });
+        this.setNewState(blocks, this.isPassed(blocks));
     }
 
     unsetDirection(blocks) {
@@ -134,20 +112,13 @@ class Grid extends Component {
         return blocks;
     }
 
-    setMovability(blocks) {
-        let row;
-        let col;
+    setMovability(blocks, coords) {
+        let row = coords[0];
+        let col = coords[1];
 
-        for (let i = 0; i < blocks.length; i++) {
-            if (blocks[i].isEmpty) {
-                row = blocks[i].coords[0];
-                col = blocks[i].coords[1];
-            }
-        }
-
-        blocks = this.setMovabilityCoords(blocks, row-1, col); //up
-        blocks = this.setMovabilityCoords(blocks, row+1, col); //down
-        blocks = this.setMovabilityCoords(blocks, row, col-1); //left
+        blocks = this.setMovabilityCoords(blocks, row-1, col); // up
+        blocks = this.setMovabilityCoords(blocks, row+1, col); // down
+        blocks = this.setMovabilityCoords(blocks, row, col-1); // left
         blocks = this.setMovabilityCoords(blocks, row, col+1); // right
 
         return blocks;
@@ -158,6 +129,7 @@ class Grid extends Component {
             if (blocks[i].coords[0] === row &&
                 blocks[i].coords[1] === col) {
                 blocks[i].isMovable = true;
+                break;
             }
         }
 
@@ -170,16 +142,24 @@ class Grid extends Component {
         for (let i = 0; i < blocks.length - 1; i++) {
             if (parseInt(blocks[i].text) !== (i + 1)) {
                 result = false;
+                break;
             }
         }
 
         return result;
     }
 
+    setNewState(blocks, isPassed) {
+        this.setState({
+            blocks: blocks,
+            isPassed: isPassed
+        });
+    }
+
     render() {
         const { blocks } = this.props;
 
-        const showPassed = this.state.isPassed ? 'Passed!!!' : 'not passed';
+        const showPassed = this.state.isPassed ? 'Win!' : ' ';
 
         return (
             <div>
@@ -202,6 +182,10 @@ class Grid extends Component {
 
                         if (block.direction) {
                             blockClasses.push('block--move-' + block.direction);
+                        }
+
+                        if (this.state.isPassed) {
+                            blockClasses.push('block--win');
                         }
 
                         return (
