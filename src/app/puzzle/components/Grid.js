@@ -159,15 +159,10 @@ class Grid extends Component {
     render() {
         const { blocks } = this.props;
 
-        const showPassed = this.state.isPassed ? 'Win!' : ' ';
+        const showPassed = this.state.isPassed ? 'Win!' : 'Puzzle';
 
         return (
             <div>
-                <div>
-                    <h1>
-                        {showPassed}
-                    </h1>
-                </div>
                 <div className="grid">
                     {this.state.blocks.map(function(block, i) {
                         let blockClasses = ['block'];

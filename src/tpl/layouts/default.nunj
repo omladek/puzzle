@@ -11,7 +11,6 @@
 </head>
 <body>
     <div class="main">
-        {% include '../partials/header.nunj' %}
         {% block content %}{% endblock %}
     </div>
 

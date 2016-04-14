@@ -1,13 +1,16 @@
 .block {
     background: silver;
-    outline: 1px solid black;
+    margin: 2px;
     display: inline-block;
     float: left;
-    height: @block-height;
+    font-family: arial, sans-serif;
+    font-size: 12vh;
+    font-weight: bold;
+    height: calc(@block-height ~'-' @border-width);
     line-height: @block-height;
     text-align: center;
     transition: transform .5s ease-out;
-    width: @block-width;
+    width: calc(@block-width ~'-' @border-width);
 
     &--empty {
         background: white;
@@ -15,7 +18,6 @@
     }
 
     &--movable {
-        background: lighten(silver, 9);
         cursor: pointer;
     }
 
@@ -35,10 +37,10 @@
     }
 
     &--move-right {
-        animation: animationMoveRight .25s 1 ease-out;
+        animation: animationMoveRight .25s ease-out;
     }
 
-    &--win {
+    &--win:not(.block--empty) {
         background: lime;
     }
 }
