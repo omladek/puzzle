@@ -6,7 +6,7 @@
     height: @block-height;
     line-height: @block-height;
     text-align: center;
-    transition: all .5s linear;
+    transition: transform .5s ease-out;
     width: @block-width;
 
     &--empty {
@@ -20,22 +20,22 @@
     }
 
     &--move-up {
-        animation: animationMoveUp .25s 1 linear;
+        animation: animationMoveUp .25s 1 ease-out;
 
     }
 
     &--move-down {
-        animation: animationMoveDown .25s 1 linear;
+        animation: animationMoveDown .25s 1 ease-out;
 
     }
 
     &--move-left {
-        animation: animationMoveLeft .25s 1 linear;
+        animation: animationMoveLeft .25s 1 ease-out;
 
     }
 
     &--move-right {
-        animation: animationMoveRight .25s 1 linear;
+        animation: animationMoveRight .25s 1 ease-out;
     }
 
     &--win {
