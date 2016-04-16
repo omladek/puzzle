@@ -3,7 +3,7 @@
 React playground.
 
 ## Demo
-[http://www.preview.cz/puzzle/src/puzzle.html](http://www.preview.cz/puzzle/src/puzzle.html)
+[http://omladek.github.io/puzzle/](http://omladek.github.io/puzzle/)
 
 ## Usage
 
