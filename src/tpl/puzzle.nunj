@@ -1,7 +1,0 @@
-{% extends "layouts/default.nunj" %}
-
-{% set title = "Puzzle" %}
-
-{% block content %}
-    <div id="puzzle"></div>
-{% endblock %}
