@@ -5,8 +5,7 @@ import Puzzle from './containers/Puzzle.js';
 export default {
     init: function(container, config) {
         ReactDOM.render(
-            <Puzzle
-                googleApiKey={config.googleApiKey} />,
+            <Puzzle />,
             container
         );
     }

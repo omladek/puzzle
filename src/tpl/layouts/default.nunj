@@ -20,7 +20,7 @@
         <script src="js/app.min.js"></script>
     {% endif %}
     <script>
-        var config = { googleApiKey: 'bla' };
+        var config = {};
         app.start(config);
     </script>
 </body>

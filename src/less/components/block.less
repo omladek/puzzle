@@ -1,6 +1,5 @@
 .block {
     background: silver;
-    margin: 2px;
     display: inline-block;
     float: left;
     font-family: arial, sans-serif;
@@ -8,6 +7,7 @@
     font-weight: bold;
     height: calc(@block-height ~'-' @border-width);
     line-height: @block-height;
+    margin: 2px;
     text-align: center;
     transition: transform .5s ease-out;
     width: calc(@block-width ~'-' @border-width);
@@ -22,22 +22,22 @@
     }
 
     &--move-up {
-        animation: animationMoveUp .25s 1 ease-out;
+        animation: animationMoveUp 1s 1 ease-out;
 
     }
 
     &--move-down {
-        animation: animationMoveDown .25s 1 ease-out;
+        animation: animationMoveDown 1s 1 ease-out;
 
     }
 
     &--move-left {
-        animation: animationMoveLeft .25s 1 ease-out;
+        animation: animationMoveLeft 1s 1 ease-out;
 
     }
 
     &--move-right {
-        animation: animationMoveRight .25s ease-out;
+        animation: animationMoveRight 1s 1 ease-out;
     }
 
     &--win:not(.block--empty) {
@@ -46,18 +46,66 @@
 }
 
 @keyframes animationMoveUp {
+    0%, 100% {
+        animation-timing-function: cubic-bezier(0.33333, 0.66667, 0.66667, 1);
+    }
+
     0% {
         transform: translateY(100%);
     }
 
-    100% {
+    20% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(5%);
+    }
+
+    35% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(5%);
+    }
+
+    45% {
         transform: translateY(0);
     }
 }
 
 @keyframes animationMoveDown {
+    0%, 100% {
+        animation-timing-function: cubic-bezier(0.33333, 0, 0.66667, 0.33333);
+    }
+
     0% {
         transform: translateY(-100%);
+    }
+
+    30% {
+        transform: translateY(0);
+    }
+
+    45% {
+        transform: translateY(-45%);
+    }
+
+    60% {
+        transform: translateY(0);
+    }
+
+    75% {
+        transform: translateY(-30%);
+    }
+
+    85% {
+        transform: translateY(0);
+    }
+
+    95% {
+        transform: translateY(-5%);
     }
 
     100% {
@@ -66,8 +114,36 @@
 }
 
 @keyframes animationMoveLeft {
+    0%, 100% {
+        animation-timing-function: cubic-bezier(0.33333, 0.66667, 0.66667, 1);
+    }
+
     0% {
         transform: translateX(100%);
+    }
+
+    30% {
+        transform: translateX(0);
+    }
+
+    45% {
+        transform: translateX(15%);
+    }
+
+    60% {
+        transform: translateX(0);
+    }
+
+    75% {
+        transform: translateX(5%);
+    }
+
+    85% {
+        transform: translateX(0);
+    }
+
+    95% {
+        transform: translateX(2%);
     }
 
     100% {
@@ -76,8 +152,36 @@
 }
 
 @keyframes animationMoveRight {
+    0%, 100% {
+        animation-timing-function: cubic-bezier(0.33333, 0, 0.66667, 0.33333);
+    }
+
     0% {
         transform: translateX(-100%);
+    }
+
+    30% {
+        transform: translateX(0);
+    }
+
+    45% {
+        transform: translateX(-15%);
+    }
+
+    60% {
+        transform: translateX(0);
+    }
+
+    75% {
+        transform: translateX(-5%);
+    }
+
+    85% {
+        transform: translateX(0);
+    }
+
+    95% {
+        transform: translateX(-2%);
     }
 
     100% {

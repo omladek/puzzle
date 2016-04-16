@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react/addons';
 import Block from '../components/Block.js';
+import Shuffle from '../components/Shuffle.js';
 
 class Grid extends Component {
     constructor(...args) {
@@ -10,7 +11,7 @@ class Grid extends Component {
         };
     }
 
-    handleBlockClick(index) {
+    handleBlockClick(index, skipAnimation) {
         const blocks = this.state.blocks;
         const row = blocks[index].coords[0];
         const col = blocks[index].coords[1];
@@ -18,7 +19,7 @@ class Grid extends Component {
         const moveTo = targetInfo.targetIndex;
         const direction = targetInfo.direction;
 
-        this.switchBlocks(blocks, index, moveTo, direction);
+        this.switchBlocks(blocks, index, moveTo, direction, skipAnimation);
     }
 
     getTargetInfo(blocks, row, col) {
@@ -73,7 +74,7 @@ class Grid extends Component {
         };
     }
 
-    switchBlocks(blocks, from, to, direction) {
+    switchBlocks(blocks, from, to, direction, skipAnimation) {
         let oldtext = blocks[from].text;
         let newtext = blocks[to].text;
 
@@ -83,7 +84,10 @@ class Grid extends Component {
         blocks[to].isEmpty = false;
         blocks[to].isMovable = true;
         blocks[to].text = oldtext;
-        blocks[to].direction = direction;
+
+        if (!skipAnimation) {
+            blocks[to].direction = direction;
+        }
 
         // set empty block
         blocks[from].isEmpty = true;
@@ -156,6 +160,37 @@ class Grid extends Component {
         });
     }
 
+    // because the initial sequence of blocks is solvable,
+    // this randomization will work OK
+    handleShuffleClick() {
+        // get random number of iterations
+        const randomRepeater = Math.floor(Math.random() * 30) + 30;
+
+        console.log('doing: ' + randomRepeater + ' iterations');
+
+        for (var i = 0; i < randomRepeater; i++) {
+            console.log('iteration: ' + i + ' of ' + randomRepeater);
+
+            let blocks = this.state.blocks;
+            let movableBlocks = [];
+
+            // get movable blocks
+            for (let j = 0; j < blocks.length; j++) {
+                if (blocks[j].isMovable) {
+                    movableBlocks.push(j);
+                }
+            }
+
+            // select random movable block
+            let randomIndex = movableBlocks[Math.floor(Math.random()*movableBlocks.length)];
+
+            console.log('click: ' + randomIndex);
+
+            // click the blck
+            this.handleBlockClick(randomIndex, true);
+        }
+    }
+
     render() {
         const { blocks } = this.props;
 
@@ -163,6 +198,9 @@ class Grid extends Component {
 
         return (
             <div>
+                <Shuffle
+                    onShuffleClick={this.handleShuffleClick.bind(this)} />
+
                 <div className="grid">
                     {this.state.blocks.map(function(block, i) {
                         let blockClasses = ['block'];

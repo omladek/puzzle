@@ -4,7 +4,7 @@ import Puzzle from './puzzle/puzzle.js';
 let app = {};
 
 app.start = function(config) {
-    app.puzzle = app.initStatic(Puzzle, document.getElementById('puzzle'), config);
+    app.puzzle = app.init(Puzzle.init, document.getElementById('puzzle'), config);
 };
 
 app.init = function(Klass, container, ...args) {

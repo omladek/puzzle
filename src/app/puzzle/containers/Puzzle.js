@@ -4,13 +4,11 @@ import Grid from '../components/Grid.js';
 class Puzzle extends Component {
     constructor(...args) {
         super(...args);
-        this.state = {
-            mapPopupIsOpen: false
-        };
+        this.state = {};
     }
 
     render() {
-        const { googleApiKey } = this.props;
+        const {} = this.props;
         const blocks = {
             items: [
                 {
@@ -122,6 +120,4 @@ class Puzzle extends Component {
 
 export default Puzzle;
 
-Puzzle.propTypes = {
-    googleApiKey: PropTypes.string.isRequired
-};
+Puzzle.propTypes = {};
