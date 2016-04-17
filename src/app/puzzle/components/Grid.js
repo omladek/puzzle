@@ -11,15 +11,15 @@ class Grid extends Component {
         };
     }
 
-    handleBlockClick(index, skipAnimation) {
-        const blocks = this.state.blocks;
+    handleBlockClick(index, skipAnimation, blocksInput) {
+        const blocks = blocksInput ? blocksInput : this.state.blocks;
         const row = blocks[index].coords[0];
         const col = blocks[index].coords[1];
         const targetInfo = this.getTargetInfo(blocks, row, col);
         const moveTo = targetInfo.targetIndex;
         const direction = targetInfo.direction;
 
-        this.switchBlocks(blocks, index, moveTo, direction, skipAnimation);
+        return this.switchBlocks(blocks, index, moveTo, direction, skipAnimation);
     }
 
     getTargetInfo(blocks, row, col) {
@@ -97,7 +97,12 @@ class Grid extends Component {
         blocks = this.unsetMovability(blocks);
         blocks = this.setMovability(blocks, blocks[from].coords);
 
-        this.setNewState(blocks, this.isPassed(blocks));
+        if (skipAnimation) {
+            return blocks;
+        } else {
+            console.log('setting new state');
+            this.setNewState(blocks, this.isPassed(blocks));
+        }
     }
 
     unsetDirection(blocks) {
@@ -164,14 +169,12 @@ class Grid extends Component {
     // this randomization will work OK
     handleShuffleClick() {
         // get random number of iterations
-        const randomRepeater = Math.floor(Math.random() * 30) + 30;
+        let blocks = this.state.blocks;
+        const randomRepeater = Math.floor(Math.random() * 500) + 500;
+        const skipAnimation = true;
 
-        console.log('doing: ' + randomRepeater + ' iterations');
-
-        for (var i = 0; i < randomRepeater; i++) {
+        for (let i = 0; i < randomRepeater; i++) {
             console.log('iteration: ' + i + ' of ' + randomRepeater);
-
-            let blocks = this.state.blocks;
             let movableBlocks = [];
 
             // get movable blocks
@@ -184,10 +187,12 @@ class Grid extends Component {
             // select random movable block
             let randomIndex = movableBlocks[Math.floor(Math.random()*movableBlocks.length)];
 
-            console.log('click: ' + randomIndex);
-
-            // click the blck
-            this.handleBlockClick(randomIndex, true);
+            // if on the last iteration: set new state
+            if ((randomRepeater - 1) === i) {
+                this.handleBlockClick(randomIndex, false, blocks);
+            } else { // else just update the blocks
+                blocks = this.handleBlockClick(randomIndex, skipAnimation, blocks);
+            }
         }
     }
 
